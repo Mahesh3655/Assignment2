@@ -35,10 +35,12 @@ class LinkedList:
     def insertAtAnyPosition(self,pos,data):
         newNode = self.Node(data)
         temp = self.head
-        for i in range(1,pos-1):
+        while temp and pos !=1:
             temp = temp.link
+            pos -= 1
         newNode.link = temp.link
         temp.link = newNode
+
 def main():
     inp = True
     obj = LinkedList()
@@ -54,7 +56,7 @@ def main():
             obj.insertAtBegining(d)
         elif n==2:
             d = int(input("Enter the data : "))
-            obj.insertAtBegining(d)
+            obj.insertAtEnd(d)
         elif n==3:
             d = int(input("Enter the data : "))
             p = int(input("Enter the position : "))
