@@ -40,15 +40,49 @@ class LinkedList:
             pos -= 1
         newNode.link = temp.link
         temp.link = newNode
+    def deleteAtBegining(self):
+        if self.head is None:
+            print("Deletion is not possible ")
+        else:
+            print("Deleted node is : ",self.head.data)
+            self.head = self.head.link
+    def deleteAtEnd(self):
+        if self.head is None:
+            print("Deletion is not possible ")
+        else:
+            temp = self.head
+            while temp.link.link:
+                temp = temp.link
+            print("Deleted node is ",temp.link.data)
+            temp.link = None
+    def deleteAtAnyPosition(self,pos):
+        temp = self.head
+        while temp and pos!=1:
+            temp = temp.link
+            pos -=1
+        print("Deleted Node is : ",temp.link.data)
+        temp.link = temp.link.link
+
+    def count(self):
+        temp = self.head
+        c = 0
+        while temp:
+            c += 1
+            temp = temp.link
+        return c
+
 
 def main():
     inp = True
     obj = LinkedList()
     while inp ==True:
-        print("Press 1 to insert at begin\n"
+        print("Press 1 to insert at begining\n"
         "Press 2 to insert at ending\n"
         "Press 3 to insert at any position\n"
-        "Press 4 to display\n"
+        "Press 4 to delete at begining\n"
+        "press 5 to delete at end\n"
+        "press 6 to delete at any position\n"
+        "press 7 to display\n"
         "Press any other number to exit")
         n = int(input("Enter your choice : "))
         if n==1:
@@ -59,9 +93,31 @@ def main():
             obj.insertAtEnd(d)
         elif n==3:
             d = int(input("Enter the data : "))
+            print("Position should not be greater than ",obj.count())
             p = int(input("Enter the position : "))
-            obj.insertAtAnyPosition(d,p)
+            while p>obj.count():
+                print("Position should not be greater than ",obj.count())
+                p = int(input("Enter the position : "))
+                
+            if p == 0:
+                obj.insertAtBegining(d)
+            else:
+                obj.insertAtAnyPosition(p,d)
         elif n==4:
+            obj.deleteAtBegining()
+        elif n==5:
+            obj.deleteAtEnd()
+        elif n==6:
+            print("Position should not be greater than ",obj.count()-1)
+            p = int(input("Enter the position : "))
+            while p>obj.count()-1 or p < 0:
+                print("Position should not be greater than ",obj.count()-1)
+                p = int(input("Enter the position : "))
+            if p == 0:
+                obj.deleteAtEnd()
+            else:
+                obj.deleteAtAnyPosition(p)
+        elif n==7:
             obj.traversingLL()
         else:
             inp = False
