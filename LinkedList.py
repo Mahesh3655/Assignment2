@@ -84,46 +84,48 @@ def main():
         "press 6 to delete at any position\n"
         "press 7 to display\n"
         "Press any other number to exit")
-        n = int(input("Enter your choice : "))
-        if n==1:
-            d = int(input("Enter the data : "))
-            obj.insertAtBegining(d)
-        elif n==2:
-            d = int(input("Enter the data : "))
-            obj.insertAtEnd(d)
-        elif n==3:
-            d = int(input("Enter the data : "))
-            print("Position should not be greater than ",obj.count())
-            p = int(input("Enter the position : "))
-            while p>obj.count():
+        try:
+            n = int(input("Enter your choice : "))
+            if n==1:
+                d = int(input("Enter the data : "))
+                obj.insertAtBegining(d)
+            elif n==2:
+                d = int(input("Enter the data : "))
+                obj.insertAtEnd(d)
+            elif n==3:
+                d = int(input("Enter the data : "))
                 print("Position should not be greater than ",obj.count())
                 p = int(input("Enter the position : "))
-                
-            if p == 0:
-                obj.insertAtBegining(d)
-            else:
-                obj.insertAtAnyPosition(p,d)
-        elif n==4:
-            obj.deleteAtBegining()
-        elif n==5:
-            obj.deleteAtEnd()
-        elif n==6:
-            print("Position should not be greater than ",obj.count()-1)
-            p = int(input("Enter the position : "))
-            while p>obj.count()-1 or p < 0:
+                while p>obj.count():
+                    print("Position should not be greater than ",obj.count())
+                    p = int(input("Enter the position : "))
+                    
+                if p == 0:
+                    obj.insertAtBegining(d)
+                else:
+                    obj.insertAtAnyPosition(p,d)
+            elif n==4:
+                obj.deleteAtBegining()
+            elif n==5:
+                obj.deleteAtEnd()
+            elif n==6:
                 print("Position should not be greater than ",obj.count()-1)
                 p = int(input("Enter the position : "))
-            if p == 0:
-                obj.deleteAtEnd()
+                while p>obj.count()-1 or p < 0:
+                    print("Position should not be greater than ",obj.count()-1)
+                    p = int(input("Enter the position : "))
+                if p == 0:
+                    obj.deleteAtEnd()
+                else:
+                    obj.deleteAtAnyPosition(p)
+            elif n==7:
+                obj.traversingLL()
             else:
-                obj.deleteAtAnyPosition(p)
-        elif n==7:
-            obj.traversingLL()
-        else:
-            inp = False
+                inp = False
+        except:
+            print("Input Error")
 
 
 
 if __name__ == "__main__":
     main()
-
